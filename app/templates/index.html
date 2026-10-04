@@ -1,0 +1,222 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block main %}
+
+<!-- Hero + Upload -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge"><i class="fa-solid fa-rocket"></i> CNN-powered image classification</span>
+    <h1>Identify any celestial body in seconds</h1>
+    <p class="lead">Upload a photo or paste an image URL. A convolutional neural network trained on planets, moons,
+      asteroids, and galaxies will classify it and pull in facts straight from Wikipedia.</p>
+
+    <div class="card-surface mx-auto mt-5" style="max-width: 560px;">
+      <form id="classify-form" action="/" method="post" enctype="multipart/form-data" novalidate>
+        {{form.csrf_token}}
+
+        <div class="col-12 d-flex justify-content-center mb-2">
+          <div class="row text-center">
+            <div class="col-12">
+              <img
+                src="{{url_for('static', filename='images/ajax-loader.gif')}}"
+                class="loader mx-auto"
+              />
+            </div>
+            <div class="col-12">
+              <p class="loader mx-auto pt-2">Processing&hellip;</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-image-form text-center">
+          <label for="image_url" class="form-label fw-semibold mb-2 d-block">Paste an image URL</label>
+          <div class="col-12 d-flex justify-content-center">
+            {{form.image_url}}
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            {% if form.image_url.errors %} {% for error in form.image_url.errors %}
+            <span class="form-error">{{error}}</span>
+            {% endfor %} {% endif %}
+          </div>
+        </div>
+
+        <div class="upload-divider">or</div>
+
+        <div class="my-image-form text-center">
+          <label class="form-label fw-semibold mb-2 d-block">Upload an image file</label>
+          {{form.image_file}}
+          <div class="dropzone text-center" id="custom-file-upload">
+            <button type="button" id="file-label" class="custom-button secondary">
+              <i class="fa-solid fa-cloud-arrow-up me-2"></i>Choose an image
+            </button>
+            <label id="imageName" class="mt-3"></label>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            {% if form.image_file.errors %} {% for error in form.image_file.errors %}
+            <span class="form-error">{{error}}</span>
+            {% endfor %} {% endif %}
+          </div>
+        </div>
+
+        <div id="validation-error" class="text-center mt-3" style="display:none;">
+          <span class="form-error d-inline-block mx-auto" style="text-align:center;">
+            <i class="fa-solid fa-circle-exclamation me-1"></i>
+            Please upload an image or paste an image URL before classifying.
+          </span>
+        </div>
+
+        <div class="my-image-form col-12 d-flex justify-content-center mt-4">
+          <button type="submit" class="custom-button">
+            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Classify this image
+          </button>
+        </div>
+        {% if file_url %}
+          <div class="mt-4 text-center">
+              <img src="{{file_url}}" style="width: 320px; border-radius: var(--radius-md);">
+          </div>
+       {% endif %}
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Supported classes -->
+<section>
+  <div class="container text-center">
+    <div class="section-eyebrow">12 object classes</div>
+    <h2 class="section-title">What the model can recognize</h2>
+    <p class="section-subtitle mx-auto mb-4">Trained to tell apart eight planets, our Moon, asteroids, and spiral &amp; elliptical galaxies.</p>
+    <div>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Mercury</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Venus</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Earth</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Mars</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Jupiter</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Saturn</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Uranus</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Neptune</span>
+      <span class="class-chip"><i class="fa-solid fa-moon"></i>Moon</span>
+      <span class="class-chip"><i class="fa-solid fa-meteor"></i>Asteroids</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Spiral Galaxy</span>
+      <span class="class-chip"><i class="fa-solid fa-circle-dot"></i>Elliptical Galaxy</span>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">Why this project</div>
+      <h2 class="section-title">A small, focused classifier</h2>
+      <p class="section-subtitle mx-auto">Built as a deep learning exercise in image classification — simple to run, easy to understand, and genuinely useful for quick identification.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>CNN classification</h3>
+          <p>A convolutional neural network trained on labeled imagery predicts the most likely class with a confidence score for every category.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-brands fa-wikipedia-w"></i></div>
+          <h3>Instant facts</h3>
+          <p>Once classified, the app looks up the object on Wikipedia and surfaces a summary plus key statistics like mass and diameter.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Reverse image search</h3>
+          <p>Want to dig deeper? Jump straight into a Google reverse image search for the photo you uploaded.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section>
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-eyebrow">How it works</div>
+      <h2 class="section-title">Three simple steps</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-4">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>
+            <h3>Provide an image</h3>
+            <p>Upload a file from your device or paste a direct link to an image.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>
+            <h3>Model runs inference</h3>
+            <p>The CNN processes the image and ranks all twelve classes by confidence.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            <h3>Get the result</h3>
+            <p>See the top prediction alongside a summary and key facts about the object.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  (function () {
+    var form = document.getElementById("classify-form");
+    var urlInput = document.getElementById("image_url");
+    var fileInput = document.getElementById("image_file");
+    var errorBox = document.getElementById("validation-error");
+    var fileLabelButton = document.getElementById("file-label");
+
+    if (fileLabelButton) {
+      fileLabelButton.addEventListener("click", function () {
+        open_browser();
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      var hasUrl = urlInput && urlInput.value.trim().length > 0;
+      var hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
+
+      if (!hasUrl && !hasFile) {
+        event.preventDefault();
+        errorBox.style.display = "block";
+        errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+      }
+
+      errorBox.style.display = "none";
+      upload_image();
+    });
+
+    // hide the validation message as soon as the user starts fixing it
+    if (urlInput) {
+      urlInput.addEventListener("input", function () {
+        errorBox.style.display = "none";
+      });
+    }
+    if (fileInput) {
+      fileInput.addEventListener("change", function () {
+        errorBox.style.display = "none";
+      });
+    }
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block main %}
+
+<section>
+	<div class="container text-center">
+		<div class="section-eyebrow">About this project</div>
+		<h1 class="section-title">Classification of Celestial Bodies using a CNN</h1>
+		<p class="section-subtitle mx-auto mb-4" id="aboutProject">
+			A deep learning project that trains a convolutional neural network to recognize planets, our Moon,
+			asteroids, and galaxies from a single image, then enriches the result with facts pulled live from Wikipedia.
+		</p>
+		<a href="https://github.com/kevinmathew247/CNN-Image-Detection-For-Celestial-Bodies" target="_blank" class="custom-button px-4 mb-5 d-inline-block">
+			<i class="fa-brands fa-github me-2"></i>
+			View the source code on GitHub
+		</a>
+
+		<div class="row g-4 mt-4 text-start">
+			<div class="col-12 col-md-4">
+				<div class="feature-card">
+					<div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+					<h3>12 classes</h3>
+					<p>Eight planets, the Moon, asteroids, and spiral &amp; elliptical galaxies.</p>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
+				<div class="feature-card">
+					<div class="feature-icon"><i class="fa-solid fa-code"></i></div>
+					<h3>Open source</h3>
+					<p>Built with Flask, TensorFlow, and Keras. The full codebase is free to explore and reuse.</p>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
+				<div class="feature-card">
+					<div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+					<h3>Learning project</h3>
+					<p>Created as a hands-on exercise in applying CNNs to a real-world image classification task.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
