@@ -2,6 +2,10 @@
 
 A Flask web application that uses a Convolutional Neural Network (CNN) to classify images of celestial bodies — planets, moons, asteroids, and galaxies — and returns facts about the predicted object pulled from Wikipedia.
 
+## Screenshot
+
+![Celestial Bodies Detection home page](docs/screenshot.png)
+
 ## Features
 
 - Upload an image or provide a URL to classify a celestial body
