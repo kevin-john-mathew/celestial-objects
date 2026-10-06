@@ -2,9 +2,13 @@
 
 A Flask web application that uses a Convolutional Neural Network (CNN) to classify images of celestial bodies — planets, moons, asteroids, and galaxies — and returns facts about the predicted object pulled from Wikipedia.
 
-## Screenshot
+## Screenshots
 
 ![Celestial Bodies Detection home page](docs/screenshot.png)
+
+| Planet (Saturn) | Moon | Spiral Galaxy |
+|---|---|---|
+| ![Saturn prediction result](docs/screenshot-saturn.png) | ![Moon prediction result](docs/screenshot-moon.png) | ![Spiral Galaxy prediction result](docs/screenshot-galaxy.png) |
 
 ## Features
 
@@ -23,51 +27,6 @@ Asteroids, Earth, Elliptical Galaxy, Jupiter, Mars, Mercury, Moon, Neptune, Satu
 - **Backend:** Flask, Flask-WTF, Flask-Uploads
 - **Machine Learning:** TensorFlow, Keras
 - **Data:** Wikipedia API, PyYAML
-
-## Getting Started
-
-### 1. Create a virtual environment (recommended)
-
-Python virtual environments keep this project's dependencies isolated from your system packages.
-
-```bash
-virtualenv --system-site-packages -p python3 ./venv
-source ./venv/bin/activate   # sh, bash, ksh, or zsh
-```
-
-If you prefer conda:
-
-```bash
-conda create -n tensorflow python=3.7
-conda activate tensorflow
-```
-
-### 2. Install dependencies
-
-Move into the image training directory and install from the requirements file:
-
-```bash
-cd hub/examples/image_retraining
-pip install -r requirements.txt
-```
-
-Or install the core packages individually:
-
-```bash
-pip install tensorflow==1.14
-pip install wikipedia
-pip install PyYAML
-```
-
-### 3. Run the app
-
-From the project root:
-
-```bash
-python run.py
-```
-
-The app will be available locally at `http://127.0.0.1:5000`.
 
 ## Project Structure
 
